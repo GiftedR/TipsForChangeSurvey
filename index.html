@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tips for Change Survey</title>
+</head>
+<body onload="choosemyguy()">
+	<div id="a">
+
+	</div>
+	<script>
+
+let a = document.getElementById("a");
+const dataname = "surveysavedata";
+let data = {
+	"beenHere": false
+}
+
+function choosemyguy(){
+	let dosurvey = false;
+	getData()
+	if (data.beenHere == false){
+		dosurvey = Math.random() * 10 > 5;
+	}
+	data["beenHere"] = true;
+	saveData();
+	if (dosurvey){
+		window.location.replace("https://docs.google.com/forms/d/e/1FAIpQLSfUBHUmEEbezbk_rSWriIOwiqmmscHEKh2cx9G9_XDkZYTuPg/viewform");
+	} else {
+		a.innerHTML = "<p style='font-size: 2rem; text-align: center;'>Thank you for being willing to take the survey, to ensure randomness, we select at random before the form. Unfortunately, you have not been selected. Have a nice day (:</p>";
+		destroyMe();
+	}
+}
+
+function getData(){
+	if (localStorage.getItem(dataname) != null){
+		data = localStorage.getItem(dataname);
+	}
+}
+
+function saveData(){
+	data = localStorage.setItem(dataname, data);
+}
+
+function destroyMe(){
+	document.getElementsByTagName("script")[0].remove();
+}
+	</script>
+	<style>
+
+*{
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+	background-color: #111;
+}
+
+	</style>
+</body>
+</html>
